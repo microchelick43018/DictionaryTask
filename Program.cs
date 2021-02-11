@@ -9,8 +9,8 @@ namespace DictionaryTask
         static int MakeAChoice()
         {
             int choice = 0;
-            bool choiceIsNotCorrected = true;
-            while (choiceIsNotCorrected)
+            bool unCorrected = true;
+            while (unCorrected)
             {
                 choice = Convert.ToInt32(Console.ReadLine());
                 if (choice > 3 || choice < 0)
@@ -19,17 +19,19 @@ namespace DictionaryTask
                 }
                 else
                 {
-                    choiceIsNotCorrected = false;
+                    unCorrected = false;
                 }
             }
             return choice;
         }
+
         static void ShowMenu()
         {
             Console.WriteLine("1 - Добавить в словарь новое слово");
             Console.WriteLine("2 - Найти слово;");
             Console.WriteLine("3 - Выход.");
         }
+
         static void AddWord(ref Dictionary<string, string> words)
         {
             string word;
@@ -40,6 +42,7 @@ namespace DictionaryTask
             meaning = Console.ReadLine();
             words.Add(word, meaning);
         }
+
         static void FindWord(Dictionary<string, string> words)
         {
             Console.WriteLine("Введите слово, которое хотите найти: ");
@@ -53,11 +56,12 @@ namespace DictionaryTask
                 Console.WriteLine("В словаре такого слова нет!");
             }
         }
+
         static void Main(string[] args)
         {
             Dictionary<string, string> words = new Dictionary<string, string>();
-            bool choiceIsNotExit = true;
-            while(choiceIsNotExit)
+            bool exit = false;
+            while(!exit)
             {
                 ShowMenu();
                 switch (MakeAChoice())
@@ -69,7 +73,7 @@ namespace DictionaryTask
                         FindWord(words);
                         break;
                     case 3:
-                        choiceIsNotExit = false;
+                        exit = true;
                         break;
                     default:
                         break;
